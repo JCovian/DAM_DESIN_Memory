@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Card } from './components/Card';
 import { MixCards } from './helpers/MixCards';
+//import cards from './json/Baraja.json';
 
 const loadImage = require.context('./img', true);
 
@@ -13,51 +14,58 @@ function App() {
     {
       'id': 'a1',
       'tipo': 'a',
-      'imagen': 'cardA'
+      'imagen': 'cardA',
+      'flipCard': false
     },
     {
       'id': 'a2',
       'tipo': 'a',
-      'imagen': 'cardA'
+      'imagen': 'cardA',
+      'flipCard': false
     },
     {
       'id': 'b1',
       'tipo': 'b',
-      'imagen': 'cardB'
+      'imagen': 'cardB',
+      'flipCard': false
     },
     {
       'id': 'b2',
       'tipo': 'b',
-      'imagen': 'cardB'
+      'imagen': 'cardB',
+      'flipCard': false
     },
     {
       'id': 'c1',
       'tipo': 'c',
-      'imagen': 'cardC'
+      'imagen': 'cardC',
+      'flipCard': false
     },
     {
       'id': 'c2',
       'tipo': 'c',
-      'imagen': 'cardC'
+      'imagen': 'cardC',
+      'flipCard': false
     },
     {
       'id': 'd1',
       'tipo': 'd',
-      'imagen': 'cardD'
+      'imagen': 'cardD',
+      'flipCard': false
     },
     {
       'id': 'd2',
       'tipo': 'd',
-      'imagen': 'cardD'
+      'imagen': 'cardD',
+      'flipCard': false
     }
   ]
-
-
 
   useEffect(() => {
     //Baraja las cartas al montar el componente
     const mixedCards = MixCards(cards);
-    //setMano = mixedCards;
+    //Algoritmo para barajar
+    setMano(mixedCards);
   }, []);
 
   return (
@@ -75,8 +83,8 @@ function App() {
           { /*Cartas*/}
 
           {
-            cards.map(element => {
-              return <Card id = { element.id } type = { element.tipo } img = { loadImage(`./${ element.imagen }.jpg`) } flipCard = { false } />
+            mano.map(element => {
+              return <Card id = { element.id } type = { element.tipo } img = { loadImage(`./${ element.imagen }.jpg`) } flipCard = { element.flipCard } />
             })
           }
           
