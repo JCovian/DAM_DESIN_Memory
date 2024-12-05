@@ -7,7 +7,7 @@ export const Card = ({ card, onClick }) => {
 
     return (
         <div className="col border-1 pb-4">
-            <div className="card" style={{ width: "14rem", cursor: "pointer" }} onClick={ () => onClick(card) }>
+            <div className="card" style={{ width: "14rem", cursor: "pointer" }} onClick={ onClick }>
                 <img src={
                     //Si la carta está volteada o emparejada muestra el anverso, en caso contrario el reverso
                     card.flipped || card.matched ? loadImage(`./${card.imagen}.jpg`) : cardReversed } className="card-img-top" alt="Imagen de carta" />
