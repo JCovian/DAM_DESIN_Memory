@@ -1,50 +1,58 @@
 [
-    {
-      'id': 'a1',
-      'tipo': 'a',
-      'imagen': 'cardA',
-      'flipCard': false
-    },
-    {
-      'id': 'a2',
-      'tipo': 'a',
-      'imagen': 'cardA',
-      'flipCard': false
-    },
-    {
-      'id': 'b1',
-      'tipo': 'b',
-      'imagen': 'cardB',
-      'flipCard': false
-    },
-    {
-      'id': 'b2',
-      'tipo': 'b',
-      'imagen': 'cardB',
-      'flipCard': false
-    },
-    {
-      'id': 'c1',
-      'tipo': 'c',
-      'imagen': 'cardC',
-      'flipCard': false
-    },
-    {
-      'id': 'c2',
-      'tipo': 'c',
-      'imagen': 'cardC',
-      'flipCard': false
-    },
-    {
-      'id': 'd1',
-      'tipo': 'd',
-      'imagen': 'cardD',
-      'flipCard': false
-    },
-    {
-      'id': 'd2',
-      'tipo': 'd',
-      'imagen': 'cardD',
-      'flipCard': false
-    }
+  {
+    "id": "a1",
+    "tipo": "a",
+    "imagen": "cardA",
+    "flipped": false,
+    "matched": false
+  },
+  {
+    "id": "a2",
+    "tipo": "a",
+    "imagen": "cardA",
+    "flipped": false,
+    "matched": false
+  },
+  {
+    "id": "b1",
+    "tipo": "b",
+    "imagen": "cardB",
+    "flipped": false,
+    "matched": false
+  },
+  {
+    "id": "b2",
+    "tipo": "b",
+    "imagen": "cardB",
+    "flipped": false,
+    "matched": false
+  },
+  {
+    "id": "c1",
+    "tipo": "c",
+    "imagen": "cardC",
+    "flipped": false,
+    "matched": false
+  },
+  {
+    "id": "c2",
+    "tipo": "c",
+    "imagen": "cardC",
+    "flipped": false,
+    "matched": false
+  },
+  {
+    "id": "d1",
+    "tipo": "d",
+    "imagen": "cardD",
+    "flipped": false,
+    "matched": false
+  },
+  {
+    "id": "d2",
+    "tipo": "d",
+    "imagen": "cardD",
+    "flipped": false,
+    "matched": false
+  }
 ]
