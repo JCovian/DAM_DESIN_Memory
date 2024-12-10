@@ -7,15 +7,14 @@ function App() {
 
   const [cards, setCards] = useState([]);
   const [flippedCards, setFlippedCards] = useState([]);
-  //const [newFlippedCards, setNewFlippedCards] = useState([]);
-  //const [newCard, setNewCard] = useState([]);
   const [matchedCouples, setMatechedCouples] = useState(0);
+  const [activeCard, setActiveCard] = useState([]);
+  const [firstCard, setFirstCard] = useState([]);
 
   //Inicializa y baraja las cartas al montar el componente
   useEffect(() => {
     const mixedCards = MixCards([...cardsData]);
     setCards(mixedCards);
-    //console.log(cards);
   }, []);
 
   //Muestra un mensaje al completar el juego
@@ -25,70 +24,83 @@ function App() {
     }
   }, [matchedCouples]);
 
-  //Verifica que las dos cartas volteadas coinciden
-  /*
-  useEffect(() => {
-    if(flippedCards.length === 2) {
-      if(flippedCards[0].tipo === flippedCards[1].tipo) {
-        console.log("MATCH");
-        setTimeout(() => matchCards(flippedCards), 1000);
-      } else {
-        console.log("Cartas recien volteadas:" + flippedCards);
-        console.log("NO MATCH");
-        setTimeout(() => unflipCards(flippedCards), 1000);
-      }
+  //Añade la carta recien volteada al array de recien volteadas (solo puede contener 2)
+  const flipCard = (card) => {
+    if (flippedCards.length < 2 && !flippedCards.includes(card)) {
+      setFlippedCards((i) => [...i, card]);
+      setActiveCard(card);
+      console.log("Carta pinchada: ");
+      console.log(card);
     }
-  },[flippedCards, cards])*/
+  }
 
-  
-  /* Manejador del clic */
-  const handleCardClick = (card) => {
-    //Evita que más de dos cartas se volteen a la vez o que las volteadas ya esté emparejadas
-    console.log("handle flippedArray length=>" + flippedCards.length);
+  useEffect(() => {
+    const newFlippedCards = [...flippedCards];
+    const newActiveCard = cards.map(i => i.id === activeCard.id ? { ...i, flipped: true } : i);
 
-    if (flippedCards.length === 2 || card.flipped || card.matched) return;
-
-    console.log("Entra en la lógica del manejador");
-
-    //Añade carta recién volteada
-    const newFlippedCards = [...flippedCards, card];
-    //setFlippedCards((c) => [...c, card])
-    //setNewFlippedCards = [...flippedCards, card];
-    //Le cambia flipped a true a esta carta (card)
-    const newCard = cards.map(c => c.id === card.id ? { ...c, flipped: true } : c);
-    setFlippedCards(newFlippedCards);
-    setCards(newCard);
-
-    //console.log(card);
-    //console.log("Cambia flipped a true: ");
-    //console.log(cards);
-    //console.log(flippedCards);
+    if (flippedCards.length === 1) {
+      //Actualiza primera carta volteada
+      setCards(newActiveCard);
+      //Guarda copia de la primera carta volteada para más tarde
+      setFirstCard(activeCard);
+    }
     
-    if(newFlippedCards.length === 2) {
-      if(newFlippedCards[0].tipo === newFlippedCards[1].tipo) {
+    if (flippedCards.length === 2) {
+      //Actualiza segunda carta volteada
+      setCards(newActiveCard);
+
+      if (newFlippedCards[0].tipo === newFlippedCards[1].tipo) {
         console.log("MATCH");
         setTimeout(() => matchCards(newFlippedCards), 1000);
+        setFirstCard([]);
       } else {
-        console.log("Cartas recien volteadas:" + newFlippedCards);
+        console.log("Cartas no coinciden ");
+        console.log(newFlippedCards);
         console.log("NO MATCH");
         setTimeout(() => unflipCards(newFlippedCards), 1000);
-      }
-    }
-  };
+      };
+    };
+  }, [flippedCards]);
 
   const matchCards = (flippedCards) => {
-    const newCard = cards.map(c => flippedCards.includes(c) ? {...c, matched: true } : c);
+    const newCard = cards.map(i => flippedCards.includes(i) ? { ...i, matched: true } : i);
+    //console.log("match array: ");
+    //console.log(newCard);
     setCards(newCard);
     setFlippedCards([]);
     setMatechedCouples(matchedCouples + 1);
   };
 
   const unflipCards = (flippedCards) => {
-    const newCard = cards.map(c => flippedCards.includes(c) ? { ...c, flipped: false } : c);
+    console.log("contenido flippercards unFlip");
+    console.log(flippedCards);
+    
+    //const newCard = cards.map(i => flippedCards.includes(i) ? { ...i, flipped: false } : i);
+    //setCards(newCard);
+    //const newCard = cards.map(i => i.id === flippedCards.id ? { ...i, flipped: false } : i);
+    let newCard = cards.map(item => flippedCards.includes(item) ? { ...item, flipped: false } : item);
     setCards(newCard);
-    setFlippedCards([]);
-  };
+    console.log("contenido firstCard");
+    console.log(firstCard);
+    newCard = cards.map(item => item.id === firstCard.id ? { ...item, flipped: false } : item);
+    setCards(newCard);
+    
+    //const newCard = cards.map(item1 => flippedCards.find(item2 => item1.id === item2.id) ? item1.flipped = false: item1);
+    //const newCard = flippedCards.map(item => return{ {...item, flipped: false}});
+
+    //const newActiveCard = cards.map(i => i.id === activeCard.id ? { ...i, flipped: true } : i);
+    
   
+    console.log("contenido newCard en unFlip")
+    console.log(newCard);
+    //setCards(newCard);
+    setFlippedCards([]);
+    setFirstCard([]);
+    
+    console.log("UnFlip cards: ");
+    console.log(cards);
+  };
+
 
   return (
     <div className="container-fluid">
@@ -106,7 +118,7 @@ function App() {
           { /*Cartas*/}
           {
             cards.map((card) => (
-              <Card key={ card.id } card={ card } onClick={ () => handleCardClick (card) } />
+              <Card key={card.id} card={card} onClick={() => flipCard(card)} />
             ))
           }
         </div>

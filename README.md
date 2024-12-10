@@ -1,13 +1,15 @@
 # Juego de memoria en React.
 ## Ejercicio para el módulo `Desarrollo de Interfaces, DAM a distancia Avilés`
 
-Para empezar, definamos la estructura básica del juego y los componentes necesarios:
+## Para empezar, definamos la estructura básica del juego y los componentes necesarios:
 
-## Estructura del Juego:
+### Estructura del Juego:
 
-### Tablero: Un componente padre que contiene todas las cartas.
+### Tablero: 
+- Un componente padre que contiene todas las cartas.
 
-### Carta: Un componente hijo que representa una carta individual.
+### Carta: 
+- Un componente hijo que representa una carta individual.
 
 ### Comportamiento:
 - Cada carta tiene dos estados: boca arriba y boca abajo.
